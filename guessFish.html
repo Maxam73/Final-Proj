@@ -1,0 +1,148 @@
+<html>
+  <head>
+    <title> Quess the fish price</title>
+    <script>
+    //var pics = ["<img src = 'coralBeu.jpg'>, <img src = 'ppmAngel.jpg'>, <img src = 'mndFish.jpg'>,<img src = 'yllwtang.jpg'>, <img src = 'pltAr.jpg'>"]
+var pics = ["<img src = 'coralBeu.jpg' width = 450px length = 300px>","<img src = 'ppmAngel.jpg'width = 450px length = 300px>","<img src = 'mndFish.jpg'width = 450px length = 300px>", "<img src = 'yllwtang.jpg'width = 450px length = 300px>","<img src = 'pltAr.jpg'width = 450px length = 300px>"];
+    var answers = [];//Populate this with user answers
+    var solutions = [50, 30000 , 30, 70, 500000]
+    var index = 0;//add one to this in getUserAnswers to advance
+    var score = 0;//this gets added to in the checkAnswers() function
+    var table = ""; //this gets created in the displayResult() function
+
+              function getUserAnswers()
+              {
+
+                answers[index] = document.getElementById('guess').value;
+                index++;
+
+                document.getElementById('images').innerHTML= pics[index];
+
+               if(index > 4)
+               {
+                checkAnswers();
+               }
+              }
+
+              function checkAnswers()
+              {
+                for(var i = 0; i < 5; i++)
+                {
+                  if(answers[i] == solutions[i])
+                  {
+                    score++;
+                  }
+                }
+
+                displayResult();
+              }
+
+              function displayResult()
+              {
+                table = "";
+                document.getElementById("outputSC").innerHTML = ""+score + "/5 Correct!";
+                for(var i = 0; i < 5 ;i++)
+                {
+
+                  table = table + "Correct Answer: $" + solutions[i] + " Your Answer: $" + answers[i] + "<br>";
+
+                }
+                  document.getElementById("outputTB").innerHTML = table;
+                  document.getElementById("rstB").style.visibility = "visible";
+                //Sends a table to a span tag with the results
+                //Should look like this:
+
+                //Your Score:  4/5
+                //Answer 1: Cat  Your Answer: Cat
+                //Answer 2: Dog  Your Answer: Dog
+                //Answer 3: Fish  Your Answer: Fish
+                //Answer 4: Camel  Your Answer: Camel
+                //Answer 5: Griaffe  Your Answer: ajkdjahdk
+              }
+
+              function reset()
+              {
+                score = "";
+                index = 0;
+                table = "";
+                for (var i = 0; i <= 5; i++)
+                {
+                  answers.splice(i,"");
+                }
+              
+                  document.getElementById("rstB").style.visibility = "hidden";
+                    document.getElementById("outputSC").innerHTML = "";
+                    document.getElementById("outputTB").innerHTML = "";
+                  document.getElementById('images').innerHTML= pics[0]
+
+                //sets the user's answer array back to empty using .splice
+                //score = 0
+                //index  = 0 so that you start on the first picture again
+                //hide the reset button again .style.visiblity = "hidden";
+              }
+            function hide()
+            {
+              document.getElementById("rstB").style.visibility = "hidden";
+            }
+
+
+    </script>
+
+    <style>
+    body {
+     /* The image used */
+     background-image: url("reef.jpg");
+
+     /* Full height */
+     height: 100%;
+
+     /* Center and scale the image nicely */
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+    }
+ #bttn:hover{
+   background-color: #4CAF50;
+  color: white;
+
+ }
+ #heading1{
+     font-family: "Bubblegum Sans";
+      font-size: 60px;
+     color:#66FFFF;
+   }
+   #outputTB
+   {
+     font-size: 24px;
+    color:#66FFFF;
+   }
+   #outputSC
+   {
+     font-size: 24px;
+    color:#66FFFF;
+   }
+    </style>
+  </head>
+
+
+<body onload = "hide()">
+
+  <center>
+    <h2 id  = "heading1">Aquarium Fish Price Guesser!</h2>
+
+     <span id = "images"><img src = "coralBeu.jpg"></span>
+
+<br><hr></hr></br>
+
+
+  <input type = "text" id = "guess">
+  <input type = "button" value = "Next Fish..." onclick = "getUserAnswers()" id = "bttn">
+  <input type = "button" value = "reset" onclick = "reset()" id = "rstB">
+  <br>
+  <span id = "outputSC"></span>
+  <br>
+  <span id = "outputTB"></span>
+</center>
+</body>
+
+</html>
